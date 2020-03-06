@@ -46,7 +46,7 @@ def get_images(vid, cap_times, output, latex_path='', write_latex = False, top=0
 			h, w, c = frame.shape
 
 			#Crop frame using top, left, right, bottom
-			frame = frame[0+int(h*bottom):h-int(h*top),0+int(w*left):w-int(w*right)].copy()
+			frame = frame[0+int(h*top):h-int(h*bottom),0+int(w*left):w-int(w*right)].copy()
 
 			#Write image to local directory with the 
 			cv2.imwrite(output + str(t) + '.jpg', frame) 
@@ -77,7 +77,7 @@ def get_images(vid, cap_times, output, latex_path='', write_latex = False, top=0
 			line = '\t\t\\includegraphics[width=\\textwidth]{' + latex_path + str(image) + '}\n' 
 			file.write(line)
 
-			line = '\t\t\\caption{' + str(image) + ' seconds}}\n'
+			line = '\t\t\\caption{' + str(image) + ' seconds}\n'
 			file.write(line)
 
 			for l in end_sub_fig:
@@ -122,13 +122,13 @@ relative_latex_path = '../05_Figures/'
 row_images = 3
 
 #Fraction of image to crop off ie. 0.5 crops half the image, 0.2 takes the top, left, right or bottom 20%
-top_crop = 0.25
-left_crop = 0.25
-bottom_crop = 0.25 
-right_crop = 0.25
+top_crop = 0
+left_crop = 0
+bottom_crop = 0
+right_crop = 0
 
 print ('Exporting frame from ' + video_file)
 
-get_images(video_file, times, output_location+name, relative_latex_path, build_latex, top_crop, left_crop, bottom_crop, right_crop, row_images)
+get_images(video_file, times, output_location+name, relative_latex_path+name, build_latex, top_crop, left_crop, bottom_crop, right_crop, row_images)
 
 print ('Export complete')
